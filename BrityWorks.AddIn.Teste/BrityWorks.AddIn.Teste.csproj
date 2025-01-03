@@ -80,6 +80,7 @@
   <ItemGroup>
     <Page Include="Resources\String\String-en-US.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

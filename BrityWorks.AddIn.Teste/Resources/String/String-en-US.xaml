@@ -5,7 +5,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- (1) Title message (MSG_TITLE_...) -->
-    <system:String x:Key="MSG_TITLE_TESTE">Title Sample</system:String>
+    <system:String x:Key="MSG_TITLE_SAMPLE">Title Sample</system:String>
 
     <!-- (2) Messages (MSG_...) -->
     <system:String x:Key="MSG_SAMPLE1">This is a sample.</system:String>
