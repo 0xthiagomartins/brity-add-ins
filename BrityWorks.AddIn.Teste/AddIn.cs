@@ -19,7 +19,6 @@ namespace BrityWorks.AddIn.Teste
             List<IActivity> activities = new List<IActivity>()
             {
                 new NormalActivitySample(),
-
             };
             return activities;
         }

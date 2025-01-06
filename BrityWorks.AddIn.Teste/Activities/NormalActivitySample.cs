@@ -50,7 +50,7 @@ namespace BrityWorks.AddIn.Teste.Activities
 
         public void OnLoad(PropertySet properties)
         {
-            throw new System.NotImplementedException();
+            return;
         }
 
         public object OnRun(IDictionary<string, object> properties)
