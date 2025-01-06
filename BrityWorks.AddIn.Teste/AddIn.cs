@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using BrityWorks.AddIn.Teste.Properties;
-using RPAGO.AddIn;
+using RPAGO.AddIn;  
 using BrityWorks.AddIn.Teste.Activities;
 
 namespace BrityWorks.AddIn.Teste

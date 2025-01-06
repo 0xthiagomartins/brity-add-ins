@@ -1,4 +1,4 @@
-﻿using BrityWorks.AddIn.Teste.Properties;
+﻿using BrityWorks.AddIn.DB.Properties;
 using RPAGO.AddIn;
 using RPAGO.Common.Library;
 using RPAGO.Common.Data;
@@ -7,7 +7,7 @@ using System.Windows;
 using System.Collections.Generic;
 
 
-namespace BrityWorks.AddIn.Teste.Activities
+namespace BrityWorks.AddIn.DB.Activities
 {
     internal class NormalActivitySample : IActivityItem
     {
@@ -22,12 +22,10 @@ namespace BrityWorks.AddIn.Teste.Activities
 
         public string DisplayName => "Do something";
 
-        public System.Drawing.Bitmap Icon => Resources.teste_activity;
-
+        public System.Drawing.Bitmap Icon => Resources.DBIcon;
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;
 
         public PropKey DisplayTextProperty => OutputPropKey;
-
         public PropKey OutputProperty => OutputPropKey;
 
          
