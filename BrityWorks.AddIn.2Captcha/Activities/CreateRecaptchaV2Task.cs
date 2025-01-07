@@ -8,11 +8,12 @@ using System.Drawing;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
+using BrityWorks.AddIn.TwoCaptcha.Properties;
 
 namespace BrityWorks.AddIn.TwoCaptcha.Activities
 {
-    internal class CreateRecaptchaV2TaskActivity : IActivityItem
+    internal class CreateRecaptchaV2Task : IActivityItem
     {
         // PropKeys
         public static readonly PropKey ClientKeyPropKey = new PropKey("TwoCaptcha", "ClientKey");
@@ -25,13 +26,13 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
         public string DisplayName => "Create reCAPTCHA V2 Task";
 
         // Ícone (opcional)
-        public Bitmap Icon => null;
+        public Bitmap Icon => Resources.Icon;
 
         // Modo headless ou UI
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;
 
         // Se quiser exibir algum texto "ao vivo", poderia usar um DisplayTextProperty aqui
-        public PropKey DisplayTextProperty => null;
+        public PropKey DisplayTextProperty => CreatedTaskIdPropKey;
 
         // Definimos o TaskId como nossa "saída" principal
         public PropKey OutputProperty => CreatedTaskIdPropKey;
@@ -41,6 +42,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
         {
             return new List<Property>
             {
+                new Property(this, CreatedTaskIdPropKey, "RESULT").SetRequired(),
                 new Property(this, ClientKeyPropKey, "YOUR_API_KEY").SetRequired(),
                 new Property(this, WebsiteURLPropKey, "https://2captcha.com/demo/recaptcha-v2").SetRequired(),
                 new Property(this, WebsiteKeyPropKey, "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u").SetRequired(),
@@ -77,7 +79,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
 
             // 3. Fazer a requisição HTTP
             string url = "https://api.2captcha.com/createTask";
-            using var httpClient = new HttpClient();
+            var httpClient = new HttpClient();
 
             try
             {

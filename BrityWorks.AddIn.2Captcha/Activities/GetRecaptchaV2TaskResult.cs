@@ -8,24 +8,25 @@ using System.Drawing;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
+using BrityWorks.AddIn.TwoCaptcha.Properties;
 
 namespace BrityWorks.AddIn.TwoCaptcha.Activities
 {
-    internal class GetRecaptchaV2TaskResultActivity : IActivityItem
+    internal class GetRecaptchaV2TaskResult : IActivityItem
     {
         // PropKeys
-        public static readonly PropKey ClientKeyPropKey = CreateRecaptchaV2TaskActivity.ClientKeyPropKey;
-        public static readonly PropKey TaskIdPropKey = CreateRecaptchaV2TaskActivity.CreatedTaskIdPropKey;
+        public static readonly PropKey ClientKeyPropKey = new PropKey("TwoCaptcha", "ClientKey");
+        public static readonly PropKey TaskIdPropKey = new PropKey("TwoCaptcha", "TaskId");
 
         // Aqui vamos guardar a string final (gRecaptchaResponse).
         public static readonly PropKey GRecaptchaResponsePropKey = new PropKey("TwoCaptcha", "GRecaptchaResponse");
 
         public string DisplayName => "Get reCAPTCHA V2 Task Result";
 
-        public Bitmap Icon => null;
+        public Bitmap Icon => Resources.Icon;
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;
 
-        public PropKey DisplayTextProperty => null;
+        public PropKey DisplayTextProperty => GRecaptchaResponsePropKey;
 
         // Como saída, retornamos o gRecaptchaResponse
         public PropKey OutputProperty => GRecaptchaResponsePropKey;
@@ -35,6 +36,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
             return new List<Property>
             {
                 // Precisamos da API Key e do TaskId
+                new Property(this, GRecaptchaResponsePropKey, "RESULT").SetRequired(),
                 new Property(this, ClientKeyPropKey, "YOUR_API_KEY").SetRequired(),
                 new Property(this, TaskIdPropKey, 0).SetRequired()
             };
@@ -60,7 +62,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
             };
 
             string url = "https://api.2captcha.com/getTaskResult";
-            using var httpClient = new HttpClient();
+            var httpClient = new HttpClient();
 
             try
             {
