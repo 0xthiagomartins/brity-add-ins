@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BrityWorks.AddIn.Teste")]
+[assembly: AssemblyTitle("BrityWorks.AddIn.2Captcha")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BrityWorks.AddIn.Teste")]
+[assembly: AssemblyProduct("BrityWorks.AddIn.2Captcha")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("76ce2eef-1400-4945-ac81-e918b55f2753")]
+[assembly: Guid("401e3ebb-bc00-4fab-a4fd-39b981fd2a8b")]
 
 // Version information for an assembly consists of the following four values:
 //
