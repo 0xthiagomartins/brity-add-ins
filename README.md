@@ -4,12 +4,12 @@
 
 1. Creating a Visual Studio Project.
     - Project type: Class library (.NET Framework, Visual c#) 
-      - File > New > Project > Installed > Visual C#
+      - **File > New > Project > Installed > Visual C#**
       - Framework: .NET Framework
     - Project name: BrityWorks.AddIn.[ProjectName]
 
 2. Add references.
-    - Project > Add Reference > Assemblies, Search.
+    - **Project > Add Reference > Assemblies, Search**.
     - WindowsBase, PresentationCore, PresentationFramework.
 
 3. Add the IPA AddIn reference.
