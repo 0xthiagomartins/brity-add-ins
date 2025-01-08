@@ -14,19 +14,13 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
     internal class GetTaskResult : IActivityItem
     {
         // PropKeys
+        public static readonly PropKey GRecaptchaResponsePropKey = new PropKey("TwoCaptcha", "GRecaptchaResponse");
         public static readonly PropKey TwoCaptchaApiKeyPropKey = new PropKey("TwoCaptcha", "TwoCaptchaApiKey");
         public static readonly PropKey TaskIdPropKey = new PropKey("TwoCaptcha", "TaskId");
-
-        public static readonly PropKey GRecaptchaResponsePropKey = new PropKey("TwoCaptcha", "GRecaptchaResponse");
-
         public string DisplayName => "Get reCAPTCHA V2 Task Result";
-
         public Bitmap Icon => Resources.ReCaptchaV2Icon;
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;
-
         public PropKey DisplayTextProperty => GRecaptchaResponsePropKey;
-
-        // Como saída, retornamos o gRecaptchaResponse
         public PropKey OutputProperty => GRecaptchaResponsePropKey;
 
         public List<Property> OnCreateProperties()
@@ -51,7 +45,6 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
             if (properties[TaskIdPropKey] is long l) taskId = l;
             else if (properties[TaskIdPropKey] is int i) taskId = i;
 
-            // Montar JSON
             var body = new
             {
                 clientKey = twoCaptchaApiKey,
@@ -119,7 +112,6 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
             }
         }
 
-        // Classe auxiliar para desserializar a resposta
         private class GetTaskResultResponse
         {
             public int errorId { get; set; }
@@ -135,7 +127,6 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
     }
     internal class CreateTask : IActivityItem
     {
-        // PropKeys
         public static readonly PropKey TwoCaptchaApiKeyPropKey = new PropKey("TwoCaptcha", "TwoCaptchaApiKey");
         public static readonly PropKey WebsiteURLPropKey = new PropKey("TwoCaptcha", "WebsiteURL");
         public static readonly PropKey WebsiteKeyPropKey = new PropKey("TwoCaptcha", "WebsiteKey");
@@ -155,8 +146,8 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
                 new Property(this, TwoCaptchaApiKeyPropKey, "'TWOCAPTCHA_API_KEY'").SetRequired(),
                 new Property(this, WebsiteURLPropKey, "'https://2captcha.com/demo/recaptcha-v2'").SetRequired(),
                 new Property(this, WebsiteKeyPropKey, "'6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u'").SetRequired(),
-                new Property(this, IsInvisiblePropKey, false) // Default: false
-            };
+                new Property(this, IsInvisiblePropKey, false)
+            };  
         }
 
         public void OnLoad(PropertySet properties)
@@ -166,13 +157,10 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
 
         public object OnRun(IDictionary<string, object> properties)
         {
-            // 1. Ler as propriedades
             string twoCaptchaApiKey = properties[TwoCaptchaApiKeyPropKey]?.ToString() ?? "";
             string websiteURL = properties[WebsiteURLPropKey]?.ToString() ?? "";
             string websiteKey = properties[WebsiteKeyPropKey]?.ToString() ?? "";
             bool isInvisible = (properties[IsInvisiblePropKey] is bool b) && b;
-
-            // 2. Montar o JSON (utilizando a doc do 2captcha)
             var body = new
             {
                 clientKey = twoCaptchaApiKey,
@@ -185,16 +173,14 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
                 }
             };
 
-            // 3. Fazer a requisição HTTP
             string url = "https://api.2captcha.com/createTask";
             var httpClient = new HttpClient();
-
             try
             {
                 var json = JsonConvert.SerializeObject(body);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var responseTask = httpClient.PostAsync(url, content);
-                responseTask.Wait(); // Sincronamente para simplificar. Em produção use async/await
+                responseTask.Wait();
 
                 var response = responseTask.Result;
                 if (!response.IsSuccessStatusCode)
@@ -202,7 +188,6 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
                     return $"HTTP error: {response.StatusCode}";
                 }
 
-                // 4. Ler o response JSON
                 var readTask = response.Content.ReadAsStringAsync();
                 readTask.Wait();
                 string responseBody = readTask.Result;
@@ -225,9 +210,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
                     return $"2Captcha errorId: {createTaskResponse.errorId}";
                 }
 
-                // 5. Obter taskId e salvar na propriedade
                 properties[CreatedTaskIdPropKey] = createTaskResponse.taskId;
-
                 return $"Task created successfully. Task ID = {createTaskResponse.taskId}";
             }
             catch (Exception ex)
@@ -236,7 +219,6 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities.ReCaptchaV2
             }
         }
 
-        // Classe auxiliar para desserializar a resposta do 2captcha
         private class CreateTaskResponse
         {
             public int errorId { get; set; }
