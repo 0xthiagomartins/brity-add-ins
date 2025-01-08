@@ -22,8 +22,8 @@ namespace BrityWorks.AddIn.TwoCaptcha
             // Registra as Activities
             return new List<IActivity>()
             {
-                new CreateRecaptchaV2Task(),
-                new GetRecaptchaV2TaskResult()
+                new Activities.ReCaptchaV2.CreateTask(),
+                new Activities.ReCaptchaV2.GetTaskResult()
             };
         }
     }
