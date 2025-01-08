@@ -16,7 +16,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
     internal class CreateRecaptchaV2Task : IActivityItem
     {
         // PropKeys
-        public static readonly PropKey ClientKeyPropKey = new PropKey("TwoCaptcha", "ClientKey");
+        public static readonly PropKey TwoCaptchaApiKeyPropKey = new PropKey("TwoCaptcha", "TwoCaptchaApiKey");
         public static readonly PropKey WebsiteURLPropKey = new PropKey("TwoCaptcha", "WebsiteURL");
         public static readonly PropKey WebsiteKeyPropKey = new PropKey("TwoCaptcha", "WebsiteKey");
         public static readonly PropKey IsInvisiblePropKey = new PropKey("TwoCaptcha", "IsInvisible");
@@ -43,9 +43,9 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
             return new List<Property>
             {
                 new Property(this, CreatedTaskIdPropKey, "RESULT").SetRequired(),
-                new Property(this, ClientKeyPropKey, "YOUR_API_KEY").SetRequired(),
-                new Property(this, WebsiteURLPropKey, "https://2captcha.com/demo/recaptcha-v2").SetRequired(),
-                new Property(this, WebsiteKeyPropKey, "6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u").SetRequired(),
+                new Property(this, TwoCaptchaApiKeyPropKey, "'TWOCAPTCHA_API_KEY'").SetRequired(),
+                new Property(this, WebsiteURLPropKey, "'https://2captcha.com/demo/recaptcha-v2'").SetRequired(),
+                new Property(this, WebsiteKeyPropKey, "'6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u'").SetRequired(),
                 new Property(this, IsInvisiblePropKey, false) // Default: false
             };
         }
@@ -59,7 +59,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
         public object OnRun(IDictionary<string, object> properties)
         {
             // 1. Ler as propriedades
-            string clientKey = properties[ClientKeyPropKey]?.ToString() ?? "";
+            string twoCaptchaApiKey = properties[TwoCaptchaApiKeyPropKey]?.ToString() ?? "";
             string websiteURL = properties[WebsiteURLPropKey]?.ToString() ?? "";
             string websiteKey = properties[WebsiteKeyPropKey]?.ToString() ?? "";
             bool isInvisible = (properties[IsInvisiblePropKey] is bool b) && b;
@@ -67,7 +67,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
             // 2. Montar o JSON (utilizando a doc do 2captcha)
             var body = new
             {
-                clientKey = clientKey,
+                clientKey = twoCaptchaApiKey,
                 task = new
                 {
                     type = "RecaptchaV2TaskProxyless", // Exemplo sem proxy

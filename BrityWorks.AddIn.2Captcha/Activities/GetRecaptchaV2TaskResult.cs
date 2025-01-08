@@ -15,10 +15,9 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
     internal class GetRecaptchaV2TaskResult : IActivityItem
     {
         // PropKeys
-        public static readonly PropKey ClientKeyPropKey = new PropKey("TwoCaptcha", "ClientKey");
+        public static readonly PropKey TwoCaptchaApiKeyPropKey = new PropKey("TwoCaptcha", "TwoCaptchaApiKey");
         public static readonly PropKey TaskIdPropKey = new PropKey("TwoCaptcha", "TaskId");
 
-        // Aqui vamos guardar a string final (gRecaptchaResponse).
         public static readonly PropKey GRecaptchaResponsePropKey = new PropKey("TwoCaptcha", "GRecaptchaResponse");
 
         public string DisplayName => "Get reCAPTCHA V2 Task Result";
@@ -35,9 +34,8 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
         {
             return new List<Property>
             {
-                // Precisamos da API Key e do TaskId
                 new Property(this, GRecaptchaResponsePropKey, "RESULT").SetRequired(),
-                new Property(this, ClientKeyPropKey, "YOUR_API_KEY").SetRequired(),
+                new Property(this, TwoCaptchaApiKeyPropKey, "'TWOCAPTCHA_API_KEY'").SetRequired(),
                 new Property(this, TaskIdPropKey, 0).SetRequired()
             };
         }
@@ -49,7 +47,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
 
         public object OnRun(IDictionary<string, object> properties)
         {
-            string clientKey = properties[ClientKeyPropKey]?.ToString() ?? "";
+            string twoCaptchaApiKey = properties[TwoCaptchaApiKeyPropKey]?.ToString() ?? "";
             long taskId = 0;
             if (properties[TaskIdPropKey] is long l) taskId = l;
             else if (properties[TaskIdPropKey] is int i) taskId = i;
@@ -57,7 +55,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
             // Montar JSON
             var body = new
             {
-                clientKey = clientKey,
+                clientKey = twoCaptchaApiKey,
                 taskId = taskId
             };
 
