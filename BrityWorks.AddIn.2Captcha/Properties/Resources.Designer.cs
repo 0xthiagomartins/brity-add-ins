@@ -69,5 +69,15 @@ namespace BrityWorks.AddIn.TwoCaptcha.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReCaptchaV2Icon {
+            get {
+                object obj = ResourceManager.GetObject("ReCaptchaV2Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

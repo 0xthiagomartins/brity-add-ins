@@ -80,5 +80,8 @@
   <ItemGroup>
     <Folder Include="Resources\String\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReCaptchaV2Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -26,7 +26,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
         public string DisplayName => "Create reCAPTCHA V2 Task";
 
         // Ícone (opcional)
-        public Bitmap Icon => Resources.Icon;
+        public Bitmap Icon => Resources.ReCaptchaV2Icon;
 
         // Modo headless ou UI
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;

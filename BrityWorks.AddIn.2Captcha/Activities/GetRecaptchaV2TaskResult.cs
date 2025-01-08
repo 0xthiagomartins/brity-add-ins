@@ -23,7 +23,7 @@ namespace BrityWorks.AddIn.TwoCaptcha.Activities
 
         public string DisplayName => "Get reCAPTCHA V2 Task Result";
 
-        public Bitmap Icon => Resources.Icon;
+        public Bitmap Icon => Resources.ReCaptchaV2Icon;
         public LibraryHeadlessType Mode => LibraryHeadlessType.Both;
 
         public PropKey DisplayTextProperty => GRecaptchaResponsePropKey;
