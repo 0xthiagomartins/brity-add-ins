@@ -6,7 +6,7 @@ using BrityWorks.AddIn.DB.Activities;
 
 
 namespace BrityWorks.AddIn.DB
-{
+{   
     public class AddIn : ActivityAddInBase
     {
         protected override string AddInDisplayName => "DB AddIn";
@@ -18,9 +18,8 @@ namespace BrityWorks.AddIn.DB
             List<IActivity> activities = new List<IActivity>()
             {
                 new ConnectToDatabaseActivity(),
-                new ExecuteSqlActivity(),
                 new ExecuteView(),
-                new DisconnectDatabaseActivity(),
+                /*new DisconnectDatabaseActivity(),*/
             };
             return activities;
         }

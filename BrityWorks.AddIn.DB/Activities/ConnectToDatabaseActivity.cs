@@ -29,18 +29,16 @@ namespace BrityWorks.AddIn.DB.Activities
             var properties = new List<Property>()
             {
                 new Property(this, ConnectionReferencePropKey, "RESULT").SetRequired(),
-                new Property(this, ConnectionStringPropKey, "Server=localhost;Database=SampleDB;User Id=user;Password=pass;").SetRequired(),
+                new Property(this, ConnectionStringPropKey, "'Server=localhost;Database=SampleDB;User Id=user;Password=pass;'").SetRequired(),
             };
             return properties;
         }
 
-        // Se for necessário carregar algo antes de rodar, podemos usar esse método
         public void OnLoad(PropertySet properties)
         {
             return;
         }
 
-        // A ação principal: abrir conexão
         public object OnRun(IDictionary<string, object> properties)
         {
             string connectionString = properties[ConnectionStringPropKey].ToString();
@@ -54,7 +52,7 @@ namespace BrityWorks.AddIn.DB.Activities
                 // ou até armazenar de outra forma, para evitar a desconexão automática.
                 properties[ConnectionReferencePropKey] = sqlConnection;
 
-                return "Connection opened successfully.";
+                return sqlConnection;
             }
             catch (Exception ex)
             {

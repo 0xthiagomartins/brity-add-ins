@@ -37,7 +37,6 @@ namespace BrityWorks.AddIn.DB.Activities
         {
             return new List<Property>()
             {
-                // O SQL que desejamos rodar
                 new Property(this, SqlCommandPropKey, "UPDATE MyTable SET IsActive = 0 WHERE Id = 1").SetRequired()
             };
         }

@@ -59,6 +59,7 @@
     <Compile Include="Activities\ConnectToDatabaseActivity.cs" />
     <Compile Include="Activities\DisconnectDatabaseActivity.cs" />
     <Compile Include="Activities\ExecuteSqlActivity.cs" />
+    <Compile Include="Activities\ExecuteView.cs" />
     <Compile Include="Activities\NormalActivitySample.cs" />
     <Compile Include="AddIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DBExecute.png" />
-    <Content Include="Activities\ExecuteView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

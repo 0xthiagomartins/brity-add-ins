@@ -1,4 +1,4 @@
-using BrityWorks.AddIn.DB.Properties;
+﻿using BrityWorks.AddIn.DB.Properties;
 using RPAGO.AddIn;
 using RPAGO.Common.Data;
 using RPAGO.Common.Library;
@@ -12,9 +12,9 @@ namespace BrityWorks.AddIn.DB.Activities
 {
     internal class ExecuteView : IActivityItem
     {
-        public static readonly PropKey ConnectionReferencePropKey = ConnectToDatabaseActivity.ConnectionReferencePropKey;
-        public static readonly PropKey SqlQueryPropKey = new PropKey("Database", "SqlQuery");
         public static readonly PropKey ResultArrayPropKey = new PropKey("Database", "ResultArray");
+        public static readonly PropKey ConnectionReferencePropKey = new PropKey("Database", "ConnectionReference");
+        public static readonly PropKey SqlQueryPropKey = new PropKey("Database", "SqlQuery");
 
         public string DisplayName => "Execute SQL View";
         public Bitmap Icon => Resources.DBExecute;
@@ -27,7 +27,8 @@ namespace BrityWorks.AddIn.DB.Activities
             return new List<Property>()
             {
                 new Property(this, ResultArrayPropKey, "RESULT").SetRequired(),
-                new Property(this, SqlQueryPropKey, "SELECT * FROM YourView").SetRequired()
+                new Property(this, SqlQueryPropKey, "'SELECT * FROM YourView'").SetRequired(),
+                new Property(this, ConnectionReferencePropKey, "ConnectionReference").SetRequired(),
             };
         }
 
@@ -38,10 +39,6 @@ namespace BrityWorks.AddIn.DB.Activities
 
         public object OnRun(IDictionary<string, object> properties)
         {
-            if (!properties.ContainsKey(ConnectionReferencePropKey))
-            {
-                throw new Exception("No database connection found. Please run 'Connect to Database' first.");
-            }
 
             var sqlConnection = properties[ConnectionReferencePropKey] as SqlConnection;
             if (sqlConnection == null || sqlConnection.State != ConnectionState.Open)
@@ -57,7 +54,7 @@ namespace BrityWorks.AddIn.DB.Activities
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     int columnCount = reader.FieldCount;
-                    
+
                     var rows = new List<object[]>();
 
                     var headers = new object[columnCount];
@@ -86,4 +83,4 @@ namespace BrityWorks.AddIn.DB.Activities
             }
         }
     }
-} 
+}
