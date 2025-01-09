@@ -1,15 +1,13 @@
-﻿using BrityWorks.AddIn.DB.Activities;
-using BrityWorks.AddIn.DB.Properties;
+﻿using BrityWorks.AddIn.DB.Properties;
 using RPAGO.AddIn;
 using RPAGO.Common.Data;
 using RPAGO.Common.Library;
-using RPAGO.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Text;
+
 
 namespace BrityWorks.AddIn.DB.Activities
 {

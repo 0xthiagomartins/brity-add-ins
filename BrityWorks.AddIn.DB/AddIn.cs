@@ -18,7 +18,9 @@ namespace BrityWorks.AddIn.DB
             List<IActivity> activities = new List<IActivity>()
             {
                 new ConnectToDatabaseActivity(),
-                new NormalActivitySample(),
+                new ExecuteSqlActivity(),
+                new ExecuteView(),
+                new DisconnectDatabaseActivity(),
             };
             return activities;
         }
